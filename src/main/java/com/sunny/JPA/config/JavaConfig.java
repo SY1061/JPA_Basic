@@ -71,6 +71,5 @@ public class JavaConfig {
         transactionManager.setEntityManagerFactory(entityManagerFactory);
 
         return transactionManager;
-        ///////
     }
 }
