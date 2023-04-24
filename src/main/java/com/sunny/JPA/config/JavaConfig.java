@@ -42,19 +42,19 @@ public class JavaConfig {
         return hibernateJpaVendorAdapter;
     }
 
+    // 프로퍼티 설정. 스프링 부트는 resources 파일에서 설정해도 된다. 이 프로퍼티의 역할은 로그 출력을 위해서 설정한 것.
     private Properties jpaProperties() {
         Properties jpaProperties = new Properties();
-        // 프로퍼티 설정. 스프링 부트는 resources 파일에서 설정하면 됨. 여기서는 로그 출력을 위해서 따로 설정을 한 것.
-        jpaProperties.setProperty("hibernate.show_sql", "false");
         // 실행하는 SQL 쿼리를 로그에 출력할지 여부.
-        jpaProperties.setProperty("hibernate.format_sql", "true");
+        jpaProperties.setProperty("hibernate.show_sql", "false");
         // 출력된 SQL 쿼리를 포맷팅해서 보여줄지 여부. (굉장히 유용함)
-        jpaProperties.setProperty("hibernate.use_sql_comments", "true");
+        jpaProperties.setProperty("hibernate.format_sql", "true");
         // 출력된 SQL 쿼리에 주석을 포함할지 여부.
-        jpaProperties.setProperty("hibernate.globally_quoted_identifiers", "true");
+        jpaProperties.setProperty("hibernate.use_sql_comments", "true");
         // 테이블 이름, 컬럼 이름 등에 따옴표를 사용할지 여부.
-        jpaProperties.setProperty("hibernate.temp.use_jdbc_metadata_defaults", "false");
+        jpaProperties.setProperty("hibernate.globally_quoted_identifiers", "true");
         // JDBC 메타데이터를 사용해서 테이블 정보를 가져올지 여부.
+        jpaProperties.setProperty("hibernate.temp.use_jdbc_metadata_defaults", "false");
         return jpaProperties;
     }
 
