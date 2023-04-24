@@ -34,7 +34,9 @@ public class JavaConfig {
     }
 
     private JpaVendorAdapter jpaVendorAdapters() {
+        // JPAVendorAdapter => JPA 구현체(vendor)에 대한 설정을 제공하는 인터페이스.
         HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
+        // Hibernate를 사용할 때 사용되는 JpaVendorAdapter의 구현 클래스.
         hibernateJpaVendorAdapter.setDatabase(Database.H2);
 
         return hibernateJpaVendorAdapter;
@@ -42,15 +44,27 @@ public class JavaConfig {
 
     private Properties jpaProperties() {
         Properties jpaProperties = new Properties();
+        // 프로퍼티 설정. 스프링 부트는 resources 파일에서 설정하면 됨. 여기서는 로그 출력을 위해서 따로 설정을 한 것.
         jpaProperties.setProperty("hibernate.show_sql", "false");
+        // 실행하는 SQL 쿼리를 로그에 출력할지 여부.
         jpaProperties.setProperty("hibernate.format_sql", "true");
+        // 출력된 SQL 쿼리를 포맷팅해서 보여줄지 여부. (굉장히 유용함)
         jpaProperties.setProperty("hibernate.use_sql_comments", "true");
+        // 출력된 SQL 쿼리에 주석을 포함할지 여부.
         jpaProperties.setProperty("hibernate.globally_quoted_identifiers", "true");
+        // 테이블 이름, 컬럼 이름 등에 따옴표를 사용할지 여부.
         jpaProperties.setProperty("hibernate.temp.use_jdbc_metadata_defaults", "false");
-
+        // JDBC 메타데이터를 사용해서 테이블 정보를 가져올지 여부.
         return jpaProperties;
     }
 
+    /*
+        스프링에서 제공하는 트랜잭션 추상화 계층.
+        코드에서 명시적으로 트랜잭션을 다루지 않아도 트랜잭션 가능.
+        PlatformTransactionManager는 스프링이 지원하는 다양한 트랜잭션 매니저들의 공통 인터페이스.
+        이 코드를 Bean으로 등록하거나 트랜잭션을 실행할 코드에 @Transactional 어노테이션 사용.
+        어노테이션에 비해 세밀한 조정이 가능하나 코드 양이 늘어나고 정확하게 사용해야 함.
+     */
     @Bean
     public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
