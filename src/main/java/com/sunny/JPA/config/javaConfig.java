@@ -1,3 +1,5 @@
+// 단, 스프링 부트는 기본적으로 EntityManagerFactory가 존재하므로 config파일에 따로 생성할 필요 x.
+
 package com.sunny.JPA.config;
 
 import com.sunny.JPA.Repostiory.RepositoryBase;
@@ -17,7 +19,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableJpaRepositories(basePackageClasses = RepositoryBase.class)
-public class JavaConfig {
+public class javaConfig {
     // 순수 JPA 환경에서는 Persistence.EntityManagerFactory 사용해서 EntityManagerFactory 생성 가능.
     // 스프링 환경에서는 LocalContainerEntityManagerFactoryBean을 사용해서 JPA 관리.
     @Bean
@@ -58,13 +60,12 @@ public class JavaConfig {
         return jpaProperties;
     }
 
-    /*
-        스프링에서 제공하는 트랜잭션 추상화 계층.
-        코드에서 명시적으로 트랜잭션을 다루지 않아도 트랜잭션 가능.
-        PlatformTransactionManager는 스프링이 지원하는 다양한 트랜잭션 매니저들의 공통 인터페이스.
-        이 코드를 Bean으로 등록하거나 트랜잭션을 실행할 코드에 @Transactional 어노테이션 사용.
-        어노테이션에 비해 세밀한 조정이 가능하나 코드 양이 늘어나고 정확하게 사용해야 함.
-     */
+    // 스프링에서 제공하는 트랜잭션 추상화 계층.
+    // 코드에서 명시적으로 트랜잭션을 다루지 않아도 트랜잭션 가능.
+    // PlatformTransactionManager는 스프링이 지원하는 다양한 트랜잭션 매니저들의 공통 인터페이스.
+    // 이 코드를 Bean으로 등록하거나 트랜잭션을 실행할 코드에 @Transactional 어노테이션 사용.
+    // 어노테이션에 비해 세밀한 조정이 가능하나 코드 양이 늘어나고 정확하게 사용해야 함.
+
     @Bean
     public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
@@ -73,3 +74,4 @@ public class JavaConfig {
         return transactionManager;
     }
 }
+
