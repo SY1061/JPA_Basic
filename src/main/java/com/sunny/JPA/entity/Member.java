@@ -1,5 +1,6 @@
 package com.sunny.JPA.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,11 +10,12 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@NoArgsConstructor
 @Entity
 @Getter
 @Setter
 @Table(name = "MEMBERS")
+@NoArgsConstructor
+@AllArgsConstructor
 public class Member {
     @Id
     @Column(name = "MEMBER_ID")
@@ -21,3 +23,4 @@ public class Member {
     @Column(name = "MEMBER_NAME")
     private String memberName;
 }
+
